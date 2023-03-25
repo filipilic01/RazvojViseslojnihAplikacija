@@ -8,7 +8,6 @@ public class BolnicaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BolnicaApplication.class, args);
-		System.out.println();
 	}
 
 }
