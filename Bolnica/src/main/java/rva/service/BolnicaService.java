@@ -31,8 +31,24 @@ public class BolnicaService {
 		return bolnicaRepository.findByNazivContainingIgnoreCase(naziv);
 	}
 	
+	public List<Bolnica> getAllBolnicaByAdresa(String adresa){ 
+		return bolnicaRepository.findByAdresaContainingIgnoreCase(adresa);
+	}
+	
 	public List<Bolnica> getBolnicaByPocetakNaziva(String pocetakNaziva){ 
 		return bolnicaRepository.getBolnicaByPocetakNaziva(pocetakNaziva.toLowerCase());
+	}
+	
+	public List<Bolnica> getBolnicaGreaterThanBudzet(double budzet){ 
+		return bolnicaRepository.findByBudzetGreaterThanOrderById(budzet);
+	}
+	
+	public Bolnica addBolnica(Bolnica bolnica) {
+		return bolnicaRepository.save(bolnica);
+	}
+	
+	public void deleteBolnicaById(int id) {
+		bolnicaRepository.deleteById(id);
 	}
 	
 }

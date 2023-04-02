@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,6 +34,7 @@ public class Odeljenje implements Serializable{
 	private String lokacija;
 	
 	@ManyToOne
+	@OnDelete(action= OnDeleteAction.CASCADE)
 	@JoinColumn(name = "bolnica")
 	private Bolnica bolnica;
 	

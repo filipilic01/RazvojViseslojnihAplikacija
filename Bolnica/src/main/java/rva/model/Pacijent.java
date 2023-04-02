@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -33,10 +36,12 @@ private static final long serialVersionUID = 1L;
 	private Date datumRodjenja;
 	
 	@ManyToOne
+	@OnDelete(action= OnDeleteAction.CASCADE)
 	@JoinColumn(name = "odeljenje")
 	private Odeljenje odeljenje;
 	
 	@ManyToOne
+	@OnDelete(action= OnDeleteAction.CASCADE)
 	@JoinColumn(name = "dijagnoza")
 	private Dijagnoza dijagnoza;
 

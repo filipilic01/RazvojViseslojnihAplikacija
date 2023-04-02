@@ -12,6 +12,11 @@ public interface BolnicaRepository extends JpaRepository<Bolnica, Integer> {
 
 	List<Bolnica> findByNazivContainingIgnoreCase(String naziv);
 	
+	List<Bolnica> findByAdresaContainingIgnoreCase(String adresa);
+	
 	@Query(value= "select * from bolnica where lower(naziv) like :pocetak%", nativeQuery= true)
 	List<Bolnica> getBolnicaByPocetakNaziva(@Param("pocetak")String pocetakNaziva);
+	
+	
+	List<Bolnica> findByBudzetGreaterThanOrderById(@Param("budzetBolnice")double budzetBol);
 } 
