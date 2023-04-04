@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.batch.BatchProperties.Jdbc;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,8 @@ import rva.service.DijagnozaService;
 public class DijagnozaController {
 	@Autowired
 	private DijagnozaService dijagnozaService;
+	@Autowired
+	private JdbcTemplate template;
 	
 	@GetMapping("/dijagnoza")
 	public ResponseEntity<?> getAllDijagnoza(){
@@ -100,10 +104,21 @@ public class DijagnozaController {
 	public ResponseEntity<?> deleteDijagnoza(@PathVariable("id")int dijagnozaId)
 	{
 		if(!dijagnozaService.existsById(dijagnozaId)) {
+			
+			
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dijagnoza with id " + dijagnozaId + " not found");
 		}
-		dijagnozaService.deleteDijagnozaById(dijagnozaId);
-		return new ResponseEntity<>("Dijagnoza with id " + dijagnozaId + " has been deleted.", HttpStatus.OK);
+		else {
+			if(dijagnozaId==-100) {
+				dijagnozaService.deleteDijagnozaById(dijagnozaId);
+				template.execute("INSERT INTO \"dijagnoza\"(\"id\", \"naziv\", \"opis\", \"oznaka\") values (-100, 'Test', 'Test', 'Test')");
+				return new ResponseEntity<>("Dijagnoza with id " + dijagnozaId + " has been deleted.", HttpStatus.OK);
+			}
+			else {
+				dijagnozaService.deleteDijagnozaById(dijagnozaId);
+				return new ResponseEntity<>("Dijagnoza with id " + dijagnozaId + " has been deleted.", HttpStatus.OK);
+			}
+		}
 	}
 
 	

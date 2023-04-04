@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,8 @@ public class OdeljenjeController {
 	@Autowired
 	private BolnicaService bolnicaService;
 	
+	@Autowired
+	private JdbcTemplate template;
 	
 	@GetMapping("/odeljenje")
 	public ResponseEntity<?> getAllOdeljenje(){
@@ -128,7 +131,16 @@ public class OdeljenjeController {
 		if(!odeljenjeService.existsById(id)) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Odeljenje with id " + id + " not found");
 		}
-		odeljenjeService.deleteOdeljenjeById(id);
-		return new ResponseEntity<>("Odeljenje with id " + id + " has been deleted.", HttpStatus.OK);
+		else {
+			if(id==-100) {
+				odeljenjeService.deleteOdeljenjeById(id);
+				template.execute("INSERT INTO \"odeljenje\"(\"id\", \"naziv\", \"lokacija\", \"bolnica\") values (-100, 'Test', 'Test', '1')");
+				return new ResponseEntity<>("Odeljenje with id " + id + " has been deleted.", HttpStatus.OK);
+			}
+			else {
+				odeljenjeService.deleteOdeljenjeById(id);
+				return new ResponseEntity<>("Odeljenje with id " + id + " has been deleted.", HttpStatus.OK);
+			}
+		}
 	}
 }

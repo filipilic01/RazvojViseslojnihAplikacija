@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,8 @@ public class BolnicaController {
 	@Autowired
 	private BolnicaService bolnicaService;
 	
+	@Autowired
+	private JdbcTemplate template;
 	
 	@GetMapping("/bolnica")
 	public ResponseEntity<?> getAllBolnica(){
@@ -113,8 +116,18 @@ public class BolnicaController {
 		if(!bolnicaService.existsById(bolnicaId)) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bolnica with id " + bolnicaId + "not found");
 		}
-		bolnicaService.deleteBolnicaById(bolnicaId);
-		return new ResponseEntity<>("Bolnica with id " + bolnicaId + "has been deleted.", HttpStatus.OK);
+		else {
+			if(bolnicaId==-100) {
+				bolnicaService.deleteBolnicaById(bolnicaId);
+				template.execute("INSERT INTO \"bolnica\"(\"id\", \"naziv\", \"adresa\", \"budzet\") values (-100, 'Test', 'Test', '25')");
+				return new ResponseEntity<>("Bolnica with id " + bolnicaId + "has been deleted.", HttpStatus.OK);
+			}
+			else {
+				bolnicaService.deleteBolnicaById(bolnicaId);
+				return new ResponseEntity<>("Bolnica with id " + bolnicaId + "has been deleted.", HttpStatus.OK);
+			}
+		}
+		
 	}
 	
 }

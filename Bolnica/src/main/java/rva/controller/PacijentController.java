@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,9 @@ public class PacijentController {
 	
 	@Autowired
 	private DijagnozaService dijagnozaService;
+	
+	@Autowired
+	private JdbcTemplate template;
 	
 	@GetMapping("/pacijent")
 	public ResponseEntity<?> getAllPacijent(){
@@ -156,8 +160,17 @@ public class PacijentController {
 		if(!pacijentService.existsById(pacijentId)) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pacijent with id " + pacijentId + " not found");
 		}
-		pacijentService.deletePacijentById(pacijentId);
-		return new ResponseEntity<>("Pacijent with id " + pacijentId + " has been deleted.", HttpStatus.OK);
+		else {
+			if(pacijentId==-100) {
+				pacijentService.deletePacijentById(pacijentId);
+				template.execute("INSERT INTO \"pacijent\"(\"id\", \"ime\", \"prezime\", \"zdr_osiguranje\", \"datum_rodjenja\", \"odeljenje\", \"dijagnoza\") values (-100, 'Test', 'Test', 'TRUE', '1900-05-24', '1', '1')");
+				return new ResponseEntity<>("Pacijent with id " + pacijentId + " has been deleted.", HttpStatus.OK);
+			}
+			else {
+				pacijentService.deletePacijentById(pacijentId);
+				return new ResponseEntity<>("Pacijent with id " + pacijentId + " has been deleted.", HttpStatus.OK);
+			}
+		}
 	}
 	
 	

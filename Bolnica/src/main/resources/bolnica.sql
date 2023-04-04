@@ -8,6 +8,8 @@ INSERT INTO "bolnica"("id", "naziv", "adresa", "budzet")
 values (nextval('bolnica_seq'), 'KBC Dragisa Misovic', 'Heroja Milana Tepica 1, Beograd', '3500000');
 INSERT INTO "bolnica"("id", "naziv", "adresa", "budzet")
 values (nextval('bolnica_seq'), 'Klinika za psihijatriju', 'Hajduk Veljkova 1, Novi Sad', '1000000');
+INSERT INTO "bolnica"("id", "naziv", "adresa", "budzet")
+values ('-100', 'Test', 'Test', '25');
 
 INSERT INTO "odeljenje"("id", "naziv", "lokacija", "bolnica")
 values (nextval('odeljenje_seq'), 'Odeljenje za standardnu negu', 'Prizemlje', '1');
@@ -47,6 +49,9 @@ INSERT INTO "odeljenje"("id", "naziv", "lokacija", "bolnica")
 values (nextval('odeljenje_seq'), 'Odeljenje za anksiozne poremecaje', 'Treci sprat', '5');
 INSERT INTO "odeljenje"("id", "naziv", "lokacija", "bolnica")
 values (nextval('odeljenje_seq'), 'Odeljenje za poremecaje raspolozenja', 'Cetvrti sprat', '5');
+INSERT INTO "odeljenje"("id", "naziv", "lokacija", "bolnica")
+values ('-100', 'Test', 'Test', '1');
+
 
 INSERT INTO "dijagnoza"("id", "naziv", "opis", "oznaka")
 values (nextval('dijagnoza_seq'), 'Dijagnoza 1 ', 'Ova dijagnoza se leci odredjenim lekovima', 'IK785');
@@ -68,6 +73,10 @@ INSERT INTO "dijagnoza"("id", "naziv", "opis", "oznaka")
 values (nextval('dijagnoza_seq'), 'Dijagnoza 9 ', 'Ova dijagnoza se leci odredjenim lekovima', 'RTTE785');
 INSERT INTO "dijagnoza"("id", "naziv", "opis", "oznaka")
 values (nextval('dijagnoza_seq'), 'Dijagnoza 10 ', 'Ova dijagnoza se leci odredjenim lekovima', 'FDS695');
+INSERT INTO "dijagnoza"("id", "naziv", "opis", "oznaka")
+values ('-100', 'Test ', 'Test', 'Test');
+
+
 
 INSERT INTO "pacijent"("id", "ime", "prezime", "zdr_osiguranje", "datum_rodjenja", "odeljenje", "dijagnoza")
 values (nextval('pacijent_seq'), 'Pera ', 'Peric', 'True', '1975-01-24', '1', '1');
@@ -89,3 +98,5 @@ INSERT INTO "pacijent"("id", "ime", "prezime", "zdr_osiguranje", "datum_rodjenja
 values (nextval('pacijent_seq'), 'Milos', 'Jovic', 'True', '1965-02-28', '16', '7');
 INSERT INTO "pacijent"("id", "ime", "prezime", "zdr_osiguranje", "datum_rodjenja", "odeljenje", "dijagnoza")
 values (nextval('pacijent_seq'), 'Divna ','Arsic', 'True', '1987-05-24', '18', '1');
+INSERT INTO "pacijent"("id", "ime", "prezime", "zdr_osiguranje", "datum_rodjenja", "odeljenje", "dijagnoza")
+values ('-100', 'Test ','Test', 'True', '1900-05-24', '1', '1');
