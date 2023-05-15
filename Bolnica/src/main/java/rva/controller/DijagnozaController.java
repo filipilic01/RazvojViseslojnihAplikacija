@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.batch.BatchProperties.Jdbc;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import rva.model.Bolnica;
 import rva.model.Dijagnoza;
 import rva.service.DijagnozaService;
 
+@CrossOrigin
 @RestController
 public class DijagnozaController {
 	@Autowired

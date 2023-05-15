@@ -16,6 +16,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { BolnicaDialogComponent } from './components/dialogs/bolnica-dialog/bolnica-dialog.component';
+import { DijagnozaDialogComponent } from './components/dialogs/dijagnoza-dialog/dijagnoza-dialog.component';
 
 
 @NgModule({
@@ -24,7 +31,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     BolnicaComponent,
     OdeljenjeComponent,
     PacijentComponent,
-    DijagnozaComponent
+    DijagnozaComponent,
+    BolnicaDialogComponent,
+    DijagnozaDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +46,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     AppRoutingModule,
     HttpClientModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
