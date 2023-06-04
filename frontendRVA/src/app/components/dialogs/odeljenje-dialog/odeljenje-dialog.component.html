@@ -1,0 +1,41 @@
+<div class="container">
+    <h3 mat-dialog-title *ngIf="flagOdelDialog == 1">Dodavanje odeljenja</h3>
+    <h3 mat-dialog-title *ngIf="flagOdelDialog == 2">Modifikacija odeljenja: {{data.id}}</h3>
+    <h3 mat-dialog-title *ngIf="flagOdelDialog == 3">Brisanje odeljenja: {{data.id}}</h3>
+
+    <form class="mat-dialog-content" #formControl="ngForm">
+        <div class="form">
+            <mat-form-field>
+                <input matInput placeholder="Naziv" [(ngModel)]="data.naziv" name="naziv" [disabled]="flagOdelDialog == 3"
+                    required>
+            </mat-form-field>
+        </div>
+
+        <div class="form">
+            <mat-form-field>
+                <input matInput placeholder="Lokacija" [(ngModel)]="data.lokacija" name="lokacija"
+                    [disabled]="flagOdelDialog == 3" required>
+            </mat-form-field>
+        </div>
+
+        <div class="form">
+            <mat-form-field>
+                <mat-select [(ngModel)]="data.bolnica" placeholder="Bolnica" name="bolnica"
+                    [compareWith]="compareTo" [disabled]="flagOdelDialog == 3" required>
+                    <mat-option *ngFor="let bolnica of bolnice" [value]="bolnica">
+                        {{ bolnica.naziv }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-button *ngIf="flagOdelDialog == 1" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+                (click)="add()">Sačuvaj</button>
+            <button mat-button *ngIf="flagOdelDialog == 2" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+                (click)="update()">Sačuvaj</button>
+            <button mat-button *ngIf="flagOdelDialog == 3" [mat-dialog-close]="1" (click)="delete()">Obriši</button>
+            <button mat-button (click)="cancel()" tabindex="-1">Poništi</button>
+        </div>
+    </form>
+</div>

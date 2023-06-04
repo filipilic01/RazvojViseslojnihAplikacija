@@ -21,8 +21,16 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { BolnicaDialogComponent } from './components/dialogs/bolnica-dialog/bolnica-dialog.component';
 import { DijagnozaDialogComponent } from './components/dialogs/dijagnoza-dialog/dijagnoza-dialog.component';
+import { OdeljenjeDialogComponent } from './components/dialogs/odeljenje-dialog/odeljenje-dialog.component';
+import { PacijentDialogComponent } from './components/dialogs/pacijent-dialog/pacijent-dialog.component';
 
 
 @NgModule({
@@ -33,7 +41,9 @@ import { DijagnozaDialogComponent } from './components/dialogs/dijagnoza-dialog/
     PacijentComponent,
     DijagnozaComponent,
     BolnicaDialogComponent,
-    DijagnozaDialogComponent
+    DijagnozaDialogComponent,
+    OdeljenjeDialogComponent,
+    PacijentDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +61,14 @@ import { DijagnozaDialogComponent } from './components/dialogs/dijagnoza-dialog/
     MatSnackBarModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule 
+    FormsModule ,
+    MatInputModule,
+    MatDatepickerModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatNativeDateModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

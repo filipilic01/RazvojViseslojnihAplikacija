@@ -10,12 +10,12 @@ import { BolnicaService } from 'src/app/services/bolnica.service';
   styleUrls: ['./bolnica-dialog.component.css']
 })
 export class BolnicaDialogComponent {
-  public flagBolDialog!: number;
+  public flagBolDialog!: number;//govori nam o tome koja operacija ce se izvrsiti
 
-  constructor(public snackBar: MatSnackBar,
+  constructor(public snackBar: MatSnackBar,//prikazuje poruku
     public bolnicaService: BolnicaService,
-    @Inject (MAT_DIALOG_DATA) public data: Bolnica,
-    public dialogRef: MatDialogRef<BolnicaDialogComponent>){}
+    @Inject (MAT_DIALOG_DATA) public data: Bolnica,//podaci dijaloga ce se skladistiti u formi bolnica modela
+    public dialogRef: MatDialogRef<BolnicaDialogComponent>){}//referencaa na dijalog
 
   public add(): void {
       console.log("ID je " + this.data.id + this.data.naziv);
@@ -49,10 +49,12 @@ export class BolnicaDialogComponent {
   }
   
   public delete(): void {
+    console.log('Uspesno obrisana sva odeljenja')
       this.bolnicaService.deleteBolnica(this.data.id).subscribe(() => {
         this.snackBar.open('Uspesno obrisana bolnica: ' + this.data.naziv, 'OK', {
           duration: 2500
-        })
+        }
+        )
       }),
         (error: Error) => {
           console.log(error.name + ' ' + error.message)
